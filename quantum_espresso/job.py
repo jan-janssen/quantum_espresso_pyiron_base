@@ -1,8 +1,23 @@
 import os
+import shutil
 from ase.calculators.espresso import Espresso
 from ase.io import write
 from pwtools import io
 from pyiron_base.jobs.job.template import TemplateJob
+from pyiron_base import state
+
+
+def copy_potentials(structure):
+    element_lst = list(set(structure.get_chemical_symbols()))
+    pot_dict = {}
+    for path in state.settings.resource_paths:
+        qe_path = os.path.join(path, "quantum_espresso", "potentials")
+        for file in os.listdir(qe_path):
+            element = file.split(".")[0]
+            if element in element_lst and element not in pot_dict.keys():
+                pot_dict[element] = os.path.join(qe_path, file)
+    for pot_file in pot_dict.values():
+        shutil.copyfile(pot_file, os.path.join(job_qe_minimize.working_directory, os.path.basename(pot_file)))
 
 
 def write_input_calc_minimize(input_dict, working_directory="."):
@@ -22,6 +37,7 @@ def write_input_calc_minimize(input_dict, working_directory="."):
         tstress=True, 
         tprnfor=True
     )
+    copy_potentials(structure=input_dict["structure"])
 
 
 def write_input_calc_static(input_dict, working_directory="."):
@@ -40,6 +56,7 @@ def write_input_calc_static(input_dict, working_directory="."):
         tstress=True, 
         tprnfor=True
     )
+    copy_potentials(structure=input_dict["structure"])
 
 
 def collect_output_calc_minimize(working_directory="."):
