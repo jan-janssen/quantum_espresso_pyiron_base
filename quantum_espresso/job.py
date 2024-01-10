@@ -1,5 +1,4 @@
 import os
-import shutil
 from ase.calculators.espresso import Espresso
 from ase.io import write
 from pwtools import io
