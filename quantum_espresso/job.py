@@ -61,7 +61,7 @@ class QEMinimize(TemplateJob):
         super().__init__(project, job_name)
         self.input.update({  # Default Parameter 
             "structure": None, 
-            "pseudopotentials": pseudopotentials, 
+            "pseudopotentials": {"Al": "Al.pbe-n-kjpaw_psl.1.0.0.UPF"}, 
             "kpts": (3, 3, 3),
         })
 
@@ -78,7 +78,7 @@ class QEStatic(TemplateJob):
         super().__init__(project, job_name)
         self.input.update({  # Default Parameter 
             "structure": None, 
-            "pseudopotentials": pseudopotentials, 
+            "pseudopotentials": {"Al": "Al.pbe-n-kjpaw_psl.1.0.0.UPF"}, 
             "kpts": (3, 3, 3),
         })
 
