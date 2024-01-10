@@ -1,0 +1,9 @@
+channels:
+- conda-forge
+dependencies:
+- python=3.11
+- pyiron_base=0.6.20
+- qe=7.2
+- pwtools=1.2.3
+- ase=3.22.1
+- matplotlib=3.8.2
