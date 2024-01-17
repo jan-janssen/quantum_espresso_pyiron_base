@@ -1,2 +1,0 @@
-#!/bin/bash
-pip install git+https://github.com/pyiron/pyiron_base.git@combo --no-deps --no-build-isolation
